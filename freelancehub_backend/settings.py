@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'jobs.apps.JobsConfig',
     'proposals.apps.ProposalsConfig',
     'contracts.apps.ContractsConfig',
+    'payments.apps.PaymentsConfig',
 
 ]
 
@@ -149,5 +150,9 @@ REST_FRAMEWORK = {
     ],
 
 }
+
+# settings.py
+STRIPE_SECRET_KEY = 'sk_test_51RjLoYCWnVkJ7TtuTiztMIb6431zCj66j1b5CrPKEdnVqdvZUHhNedurlb4cxD9rbsMW7kQBQ3AY2Dux3JCJbBSe00fQEWCZdI'  # Use your Stripe test secret key
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51RjLoYCWnVkJ7TtuqKFJOerskBE7OikFNOVqd5Q70S3VJ5ObFf3KJBhLeGB6Sy2JfV5Xc14swiUVyysRW3M2czdh00cInFS1Fh'
 
 

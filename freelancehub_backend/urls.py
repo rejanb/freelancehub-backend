@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/jobs/', include('jobs.urls')),
     path('api/proposals/', include('proposals.urls')),
     path('api/contracts/', include('contracts.urls')),
+    path('api/payments/', include('payments.urls')),
 ]
 
 # Debug: Print URL patterns
