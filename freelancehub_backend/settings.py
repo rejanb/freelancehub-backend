@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'proposals.apps.ProposalsConfig',
     'contracts.apps.ContractsConfig',
     'payments.apps.PaymentsConfig',
+    'channels',
+    'chats.apps.ChatsConfig',
+
 
 ]
 
@@ -156,3 +159,12 @@ STRIPE_SECRET_KEY = 'sk_test_51RjLoYCWnVkJ7TtuTiztMIb6431zCj66j1b5CrPKEdnVqdvZUH
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51RjLoYCWnVkJ7TtuqKFJOerskBE7OikFNOVqd5Q70S3VJ5ObFf3KJBhLeGB6Sy2JfV5Xc14swiUVyysRW3M2czdh00cInFS1Fh'
 
 
+ASGI_APPLICATION = 'freelancehub_backend.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}

@@ -4,3 +4,7 @@ python-decouple>=3.8
 django-cors-headers>=4.3.0
 djangorestframework-simplejwt>=5.3.0
 stripe >= 12.3.0
+channels==4.2.2
+channels-redis==4.2.1
+redis==6.2.0
+daphne>=4.2.1
