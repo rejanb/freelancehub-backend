@@ -14,5 +14,8 @@ class Review(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        app_label = "reviews"
+
     def __str__(self):
         return f"{self.reviewer} rated {self.reviewee} {self.rating} stars"
