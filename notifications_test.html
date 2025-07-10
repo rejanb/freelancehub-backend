@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications WebSocket Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        #log { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+        #user-id { width: 60px; }
+    </style>
+</head>
+<body>
+    <h2>Notifications WebSocket Test</h2>
+    <div>
+        <label>User ID: <input id="user-id" value="1" /></label>
+        <button id="connect-btn">Connect</button>
+    </div>
+    <div id="log"></div>
+    <script>
+        let socket = null;
+        const logDiv = document.getElementById('log');
+        const connectBtn = document.getElementById('connect-btn');
+        const userIdInput = document.getElementById('user-id');
+
+        function appendLog(msg) {
+            logDiv.innerHTML += msg + '<br />';
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        connectBtn.onclick = function() {
+            const userId = userIdInput.value;
+            if (socket) {
+                socket.close();
+            }
+            const wsUrl = `ws://${window.location.hostname}:8000/ws/notifications/${userId}/`;
+            socket = new WebSocket(wsUrl);
+            socket.onopen = function() {
+                appendLog('<em>Connected to notifications for user ' + userId + '</em>');
+            };
+            socket.onmessage = function(e) {
+                appendLog('<b>Notification:</b> ' + e.data);
+            };
+            socket.onclose = function() {
+                appendLog('<em>Disconnected.</em>');
+            };
+            socket.onerror = function(e) {
+                appendLog('<em>Error occurred.</em>');
+            };
+        };
+    </script>
+</body>
+</html>
+

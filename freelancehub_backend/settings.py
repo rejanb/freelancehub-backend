@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'payments.apps.PaymentsConfig',
     'channels',
     'chats.apps.ChatsConfig',
-
-
+    'reviews.apps.ReviewsConfig',
+    'notifications',
+    'disputes',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,17 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# DJOSER SETTINGS
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}/',
+    'ACTIVATION_URL': 'activate/{uid}/{token}/',
+    'SERIALIZERS': {},
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development/testing
+DEFAULT_FROM_EMAIL = 'noreply@yourdomain.com'

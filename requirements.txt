@@ -8,3 +8,4 @@ channels==4.2.2
 channels-redis==4.2.1
 redis==6.2.0
 daphne>=4.2.1
+djoser>=2.2.0

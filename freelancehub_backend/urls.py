@@ -26,6 +26,11 @@ urlpatterns = [
     path('api/proposals/', include('proposals.urls')),
     path('api/contracts/', include('contracts.urls')),
     path('api/payments/', include('payments.urls')),
+    path('api/reviews/', include('reviews.urls')),
+    path('api/notifications/', include('notifications.urls')),
+    path('api/disputes/', include('disputes.urls')),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.authtoken')),
 ]
 
 # Debug: Print URL patterns
