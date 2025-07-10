@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'jobs.apps.JobsConfig',
     'proposals.apps.ProposalsConfig',
+    'contracts.apps.ContractsConfig',
 
 ]
 
