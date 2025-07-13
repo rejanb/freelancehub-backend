@@ -10,6 +10,7 @@ class CustomUser(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     skills = models.JSONField(default=list, blank=True)
+    email = models.EmailField(unique=True)
     groups = models.ManyToManyField(
         Group,
         related_name='customuser_set',

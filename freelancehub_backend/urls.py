@@ -28,9 +28,7 @@ urlpatterns = [
     path('api/payments/', include('payments.urls')),
     path('api/reviews/', include('reviews.urls')),
     path('api/notifications/', include('notifications.urls')),
-    path('api/disputes/', include('disputes.urls')),
-    path('api/auth/', include('djoser.urls')),
-    path('api/auth/', include('djoser.urls.authtoken')),
+    path('api/disputes/', include('disputes.urls'))
 ]
 
 # Debug: Print URL patterns

@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -19,6 +18,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         if data['password'] != data['password_confirm']:
             raise serializers.ValidationError({"password": "Passwords must match."})
         return data
+
+    def validate_email(self, value):
+        if CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("A user with that email already exists.")
+        return value
 
     def create(self, validated_data):
         validated_data.pop('password_confirm')
