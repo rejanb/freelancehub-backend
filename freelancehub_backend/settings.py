@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
     'notifications',
     'disputes',
+    # 'rest_framework_simplejwt.token_blacklist'
 ]
 
 MIDDLEWARE = [
@@ -198,3 +199,9 @@ CORS_ALLOW_ALL_ORIGINS = True  # For development only!
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:4200",  # Angular default port
 #     "http://127.0.0.1:4200",
+# SIMPLE_JWT = {
+#     "USER_ID_FIELD": "id",
+#     "USER_ID_CLAIM": "user_id",
+#     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+#     "TOKEN_USER_CLASS": "users.models.CustomUser",
+# }
