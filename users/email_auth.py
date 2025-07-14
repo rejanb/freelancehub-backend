@@ -29,6 +29,10 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = {
             'refresh': str(refresh),
             'access': str(refresh.access_token),
+            'user': str(user.username),
+            'id':  str(user.id),
+            'email':  str(user.email),
+            'user_type': str(user.user_type),
         }
         return data
 

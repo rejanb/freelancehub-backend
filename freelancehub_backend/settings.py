@@ -61,6 +61,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "freelancehub_backend.urls"
@@ -192,3 +193,8 @@ CHANNEL_LAYERS = {
 #
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development/testing
 # DEFAULT_FROM_EMAIL = 'noreply@yourdomain.com'
+CORS_ALLOW_ALL_ORIGINS = True  # For development only!
+# Or, for production, use:
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:4200",  # Angular default port
+#     "http://127.0.0.1:4200",
