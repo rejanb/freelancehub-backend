@@ -14,3 +14,10 @@ class RegisterView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]  # Allow anyone to register
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        return Response({
+            'message': 'Registration successful!',
+            'user': response.data
+        }, status=status.HTTP_201_CREATED)

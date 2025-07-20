@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     # 'rest_framework_simplejwt.token_blacklist'
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -154,6 +156,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 12,
+    'PAGE_SIZE_QUERY_PARAM': 'page_size',
 
 }
 
@@ -205,3 +210,13 @@ CORS_ALLOW_ALL_ORIGINS = True  # For development only!
 #     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 #     "TOKEN_USER_CLASS": "users.models.CustomUser",
 # }
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    # ...other settings...
+}
+
+
+
