@@ -30,3 +30,10 @@ class DisputeResolveView(APIView):
         dispute.resolved_by = request.user
         dispute.save()
         return Response({'status': 'Dispute resolved', 'dispute': DisputeSerializer(dispute).data})
+class DisputeDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = DisputeSerializer
+    permission_classes = [permissions.IsAdminUser]  
+
+    def get_queryset(self):
+        return Dispute.objects.all()
+    

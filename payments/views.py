@@ -39,3 +39,13 @@ class PaymentListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Payment.objects.filter(user=self.request.user)
+    
+
+class PaymentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = PaymentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Payment.objects.filter(user=self.request.user)
+    
+    
