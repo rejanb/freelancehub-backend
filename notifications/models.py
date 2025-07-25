@@ -17,10 +17,24 @@ class Notification(models.Model):
         ('message', 'Message'),
         ('system', 'System'),
     ]
+    
+    PRIORITY_CHOICES = [
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High'),
+        ('urgent', 'Urgent'),
+    ]
+    
     user = models.ForeignKey(CustomUser, related_name='notifications', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
     message = models.TextField()
     notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES, default='info')
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
     is_read = models.BooleanField(default=False)
+    read_at = models.DateTimeField(null=True, blank=True)
+    action_text = models.CharField(max_length=100, null=True, blank=True)
+    action_url = models.CharField(max_length=500, null=True, blank=True)
+    data = models.TextField(default='{}')  # JSON field for additional data
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')

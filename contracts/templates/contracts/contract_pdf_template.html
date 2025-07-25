@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Agreement - {{ contract.id }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2196F3;
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        .header .company-info {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .contract-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .contract-info h2 {
+            color: #2196F3;
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 10px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .info-value {
+            color: #333;
+            margin-left: 10px;
+        }
+        
+        .parties-section {
+            margin-bottom: 30px;
+        }
+        
+        .party {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .party h3 {
+            color: #2196F3;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .terms-section {
+            margin-bottom: 30px;
+        }
+        
+        .terms-section h3 {
+            color: #2196F3;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .deliverables, .milestones {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-active { background-color: #4CAF50; color: white; }
+        .status-completed { background-color: #2196F3; color: white; }
+        .status-cancelled { background-color: #f44336; color: white; }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .signature-section {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .signature-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 80px;
+        }
+        
+        .signature-label {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .date-line {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .amount-highlight {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FREELANCE SERVICE CONTRACT</h1>
+        <div class="company-info">
+            {{ company_name }}<br>
+            {{ company_address }}<br>
+            Email: {{ company_email }} | Phone: {{ company_phone }}
+        </div>
+    </div>
+
+    <div class="contract-info">
+        <h2>Contract Information</h2>
+        <div class="info-grid">
+            <div>
+                <div class="info-item">
+                    <span class="info-label">Contract ID:</span>
+                    <span class="info-value">#{{ contract.id }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Project Type:</span>
+                    <span class="info-value">{{ project_type }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Status:</span>
+                    <span class="status-badge status-{{ contract.status }}">{{ contract.get_status_display }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="info-item">
+                    <span class="info-label">Start Date:</span>
+                    <span class="info-value">{{ contract.start_date|date:"F d, Y" }}</span>
+                </div>
+                {% if contract.end_date %}
+                <div class="info-item">
+                    <span class="info-label">End Date:</span>
+                    <span class="info-value">{{ contract.end_date|date:"F d, Y" }}</span>
+                </div>
+                {% endif %}
+                <div class="info-item">
+                    <span class="info-label">Created:</span>
+                    <span class="info-value">{{ contract.created_at|date:"F d, Y" }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="amount-highlight">
+            Total Contract Value: ${{ contract.total_payment|floatformat:2 }}
+        </div>
+    </div>
+
+    <div class="parties-section">
+        <h2>Contracting Parties</h2>
+        
+        <div class="party">
+            <h3>Client</h3>
+            <div class="info-item">
+                <span class="info-label">Name:</span>
+                <span class="info-value">{{ client.get_full_name|default:client.username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ client.email }}</span>
+            </div>
+            {% if client.phone %}
+            <div class="info-item">
+                <span class="info-label">Phone:</span>
+                <span class="info-value">{{ client.phone }}</span>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="party">
+            <h3>Freelancer</h3>
+            <div class="info-item">
+                <span class="info-label">Name:</span>
+                <span class="info-value">{{ freelancer.get_full_name|default:freelancer.username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ freelancer.email }}</span>
+            </div>
+            {% if freelancer.phone %}
+            <div class="info-item">
+                <span class="info-label">Phone:</span>
+                <span class="info-value">{{ freelancer.phone }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="terms-section">
+        <h3>Project Details</h3>
+        <div class="info-item">
+            <span class="info-label">Title:</span>
+            <span class="info-value">{{ job_title }}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Description:</span>
+            <div class="info-value">{{ job_description|linebreaks }}</div>
+        </div>
+        
+        {% if contract.deliverables %}
+        <div class="deliverables">
+            <h4>Deliverables</h4>
+            {{ contract.deliverables|linebreaks }}
+        </div>
+        {% endif %}
+        
+        {% if contract.milestones %}
+        <div class="milestones">
+            <h4>Milestones</h4>
+            {{ contract.milestones|linebreaks }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="terms-section">
+        <h3>Terms and Conditions</h3>
+        <p>This contract represents an agreement between the Client and Freelancer for the provision of services as described above. Both parties agree to the following terms:</p>
+        
+        <ol>
+            <li><strong>Scope of Work:</strong> The Freelancer agrees to provide the services described in the project details and deliverables sections.</li>
+            <li><strong>Payment:</strong> The total payment amount is ${{ contract.total_payment|floatformat:2 }} as agreed upon by both parties.</li>
+            <li><strong>Timeline:</strong> Work shall commence on {{ contract.start_date|date:"F d, Y" }}{% if contract.end_date %} and complete by {{ contract.end_date|date:"F d, Y" }}{% endif %}.</li>
+            <li><strong>Intellectual Property:</strong> All work products created under this contract shall be owned by the Client upon full payment.</li>
+            <li><strong>Confidentiality:</strong> Both parties agree to maintain confidentiality of any sensitive information shared during the project.</li>
+            <li><strong>Termination:</strong> Either party may terminate this contract with written notice as per platform guidelines.</li>
+        </ol>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-label">Client Signature</div>
+            <div class="signature-line"></div>
+            <div class="date-line">
+                {{ client.get_full_name|default:client.username }}<br>
+                Date: _________________
+            </div>
+        </div>
+        
+        <div class="signature-box">
+            <div class="signature-label">Freelancer Signature</div>
+            <div class="signature-line"></div>
+            <div class="date-line">
+                {{ freelancer.get_full_name|default:freelancer.username }}<br>
+                Date: _________________
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>This contract was generated on {{ generated_date|date:"F d, Y" }} through {{ company_name }}.</p>
+        <p>For support or questions regarding this contract, please contact {{ company_email }}</p>
+    </div>
+</body>
+</html>
